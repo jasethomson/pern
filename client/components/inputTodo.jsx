@@ -10,10 +10,10 @@ export default class InputTodo extends React.Component {
   render() {
     return (
       <div>Input Todos</div>
-      <form>
-        <input type="text"/>
-        <button>Add</button>
-      </form>
+      // <form>
+      //   <input type="text"/>
+      //   <button>Add</button>
+      // </form>
     )
   }
 }
