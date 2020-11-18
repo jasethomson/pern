@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import InputTodo from "./components/inputTodo";
 
 export default class App extends React.Component {
   constructor(props){
@@ -9,7 +10,11 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <div>App</div>
+      <Fragment>
+        <div className="container">
+          <InputTodo />
+        </div>
+      </Fragment>
     );
   }
 }
