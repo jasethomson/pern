@@ -1,6 +1,7 @@
+require('dotenv/config');
 const path = require('path');
 
-const srcPath = path.resolve(__dirname, 'client');
+const clientPath = path.resolve(__dirname, 'client');
 const publicPath = path.resolve(__dirname, 'server/public');
 
 module.exports = {
@@ -14,8 +15,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        include: srcPath,
+        test: /\.jsx/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -29,19 +29,14 @@ module.exports = {
   },
   devtool: 'source-map',
   devServer: {
-    host: '0.0.0.0',
-    port: 3000,
     contentBase: publicPath,
     historyApiFallback: true,
-    watchContentBase: true,
-    stats: 'minimal',
+    host: '0.0.0.0',
+    port: process.env.DEV_SERVER_PORT,
     proxy: {
-      '/api': {
-        target: 'http://localhost',
-        headers: {
-          Host: 'mealplanner.localhost'
-        }
-      }
-    }
+      '/api': `http://localhost:${process.env.PORT}`
+    },
+    stats: 'minimal',
+    watchContentBase: true
   }
 };
