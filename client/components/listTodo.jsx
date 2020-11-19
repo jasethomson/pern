@@ -7,6 +7,7 @@ export default class ListTodo extends React.Component {
     this.state = {
       todos: []
     }
+    this.deleteTodo = this.deleteTodo.bind(this);
   }
 
   getTodos() {
@@ -15,21 +16,53 @@ export default class ListTodo extends React.Component {
       .then(todos => this.setState({ todos }));
   }
 
+  deleteTodo(id) {
+    let req = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+    fetch(`http://localhost:5000/todos/${id}`, req)
+    .then(res => res.json())
+    .then(status => {
+      if(status === "success") {
+        let todos = this.state.todos;
+        todos = todos.filter(todo => todo.todo_id !== id);
+        this.setState({ todos });
+      } else {
+        alert(status);
+      }
+    })
+  }
+
   componentDidMount() {
     this.getTodos();
   }
 
   render() {
     return (
-      this.state.todos.map(todo => {
-        return (
-          <TodoListItem
-            key={todo.todo_id}
-            id={todo.todo_id}
-            description={todo.description}
-          />
-        );
-      })
+      <table>
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Description</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.todos.map(todo => {
+            return (
+              <TodoListItem
+                key={todo.todo_id}
+                id={todo.todo_id}
+                description={todo.description}
+                deleteTodo={this.deleteTodo}
+              />
+            );
+          })}
+        </tbody>
+      </table>
     );
   }
 }

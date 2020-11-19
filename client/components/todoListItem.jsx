@@ -1,9 +1,11 @@
 import React from 'react';
 
-function TodoListItem(props) {
+export default function TodoListItem(props) {
   return (
-    <div id={props.id} className="todoItem">
-      {props.description}
-    </div>
+    <tr id={props.id} className="todoItem">
+      <td>Incomplete</td>
+      <td>{props.description}</td>
+      <td><button onClick={() => props.deleteTodo(props.id)}>Delete</button></td>
+    </tr>
   );
 }
