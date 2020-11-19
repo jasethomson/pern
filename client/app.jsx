@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import InputTodo from "./components/inputTodo";
+import ListTodo from "./components/listTodo";
 
 export default class App extends React.Component {
   constructor(props){
@@ -13,6 +14,7 @@ export default class App extends React.Component {
       <Fragment>
         <div className="container">
           <InputTodo />
+          <ListTodo />
         </div>
       </Fragment>
     );
