@@ -13,6 +13,7 @@ export default class App extends React.Component {
       <Fragment>
         <div className="container">
           <InputTodo />
+          <ListTodo />
         </div>
       </Fragment>
     );
